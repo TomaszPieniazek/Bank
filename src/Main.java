@@ -38,7 +38,7 @@ public class Main {
         p2.wyplata("333333333333333333",33.33,"ZABIERAM ");
         Thread.sleep(2000);
         p1.wyplata("111111111111111111",92.11,"ZABIERAM ");
-
+        p2.przelew("333333333333333333", "333333333333313333", "TPPL006",2,"MIEDZYNARODOWY");
         //HISTORIA OPERACJI CALEGO BANKU
         try {
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("historia_banku.txt", true)));

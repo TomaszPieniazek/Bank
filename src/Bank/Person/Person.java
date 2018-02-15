@@ -124,6 +124,24 @@ public class Person {
         if(isAccount==false) throw new IllegalArgumentException("NIE MA TAKIEGO KONTA");
     }
 
+    public void przelew(String accountNumberFrom,String accountNumberTo, String swift, double amount, String title ){
+        boolean isAccount = false;
+        if(swift != Bank.getSwift() && accountNumberFrom!=accountNumberTo) {
+            for (int i = 0; i < this.accounts.size(); i++) {
+                if (this.accounts.get(i).getAccountNumber() == accountNumberFrom) {
+                    isAccount = true;
+                    if (this.accounts.get(i).getBalance() >= amount) {
+                        this.accounts.get(i).setBalance(this.accounts.get(i).getBalance() - amount);
+                        Bank.addToHistory("TYTUL :" + title + " | TYP TRANSAKCJI: PRZELEW MIĘDZYNARODOWY Z KONTA -" + accountNumberFrom +" |NA KONTO: "+accountNumberTo+  " | NA SUME: " + amount);
+                        this.addToHistory("TYTUL :" + title + " | TYP TRANSAKCJI: PRZELEW MIĘDZYNARODOWY Z KONTA -" + accountNumberFrom +" |NA KONTO: "+accountNumberTo+  " | NA SUME: " + amount);
+                        this.accounts.get(i).addToHistory("TYTUL :" + title + " | TYP TRANSAKCJI: PRZELEW MIĘDZYNARODOWY Z KONTA -" + accountNumberFrom + " |NA KONTO: "+accountNumberTo+ " | NA SUME: " + amount);
+                    } else throw new IllegalArgumentException("ZA MALO SRODKOW NA KONCIE");
+                }
+            }
+        }else throw new IllegalArgumentException("TO PRZELEW MIĘDZYNARODOWY!!! NIE MOZNA PRZELAC NA TEN SAM BANK");
+        if(isAccount==false) throw new IllegalArgumentException("NIE MA TAKIEGO KONTA");
+    }
+
     public void addToHistory(String s)
     {
         Date d = new Date();

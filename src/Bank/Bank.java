@@ -10,6 +10,7 @@ import java.util.List;
 public class Bank {
 
     private static final String bankName="Bank Pieniazek";
+    private static final String swift="TPPL007";
     private static ArrayList<Person> clients = new ArrayList<>();
     private static ArrayList<String> operationsHistory= new ArrayList<>();
 
@@ -81,5 +82,9 @@ public class Bank {
                 p.addAccount(a);
             }
         }
+    }
+
+    public static String getSwift() {
+        return swift;
     }
 }
